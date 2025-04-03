@@ -1,0 +1,132 @@
+/*Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
+
+An input string is valid if:
+
+Open brackets must be closed by the same type of brackets.
+Open brackets must be closed in the correct order.
+Every close bracket has a corresponding open bracket of the same type.*/
+
+
+/*Example 1:
+
+Input: s = "()"
+
+Output: true
+
+Example 2:
+
+Input: s = "()[]{}"
+
+Output: true
+
+Example 3:
+
+Input: s = "(]"
+
+Output: false
+
+Example 4:
+
+Input: s = "([])"
+
+Output: true*/
+
+
+
+
+
+import java.util.*;
+
+public class ValidParenthesis {
+    public static void main(String args[]){
+        Scanner sc=new Scanner(System.in);
+        String res=sc.next();
+
+        boolean ans=checkIsValid(res);
+
+        System.out.println(ans);
+
+    }
+
+    public static boolean checkIsValid(String res){
+        Stack<Character> st=new Stack<>();
+        int n=res.length();
+
+        for(int i=0;i<n;i++){
+            char ch=res.charAt(i);
+
+            if(ch=='(' || ch=='{' || ch=='['){
+                st.push(ch);
+            }
+            else if(ch==')' || ch=='}' || ch==']'){
+                if(st.isEmpty()) return false;
+
+                char top=st.pop();
+
+                if((top=='(' && ch!=')') || (top=='{' && ch!='}') || (top=='[' && ch!=']') ){
+                    return false;
+                }
+
+            }
+        }
+
+        return st.isEmpty();
+    }
+}
+
+
+
+
+// Stacks in Java
+// A stack is a linear data structure that follows the LIFO (Last In, First Out) principle. This means that the last element added to the stack is the first one to be removed.
+
+// syntax to create a stack in java:- 
+// Stack<Integer> stcak_name=new Stack<>();
+
+
+// It has some specific operations:-
+// 1.push(int x) (adding element to the stack)
+// 2.Pop() (removing element from stack)
+// 3.peek() (returning the top element from the stack)
+// 4.isEmpty() (returns true if the stack is empty or false when it is not)
+// 5.size() (returns the size of stack)
+
+// Stack Underflow & Overflow
+
+// Underflow: Trying to pop from an empty stack.
+// Overflow: Happens in fixed-size stacks when trying to push beyond capacity.
+
+// Time Complexity of Stack Operations
+
+// Push → O(1)
+
+// Pop → O(1)
+
+// Peek → O(1)
+
+// isEmpty → O(1)
+
+// Size → O(1)
+
+// Stack Implementation
+
+// Using Stack class (from Java’s Collection Framework)
+
+// Using ArrayDeque (Preferred due to better performance)
+
+// Using Linked List (Manually implemented stack)
+
+
+// In this question we have used an idea of adding all kind of opening brackets in stack and remove when closing bracket comes and then compare between them
+
+
+
+
+
+
+
+
+
+
+
+
