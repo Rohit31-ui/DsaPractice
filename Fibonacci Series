@@ -1,0 +1,76 @@
+//fiboancci series
+
+import java.util.*;
+
+public class Fibonacci{
+    public static void main(String args[]){
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+
+        //int[] dp=new int[n+1];
+       // Arrays.fill(dp,-1);
+        //int res=fibo(n);  //recursive call
+
+       // int res=fibo(n,dp);
+
+    //    dp[0]=0;
+    //    dp[1]=1;
+    //    for(int i=2;i<=n;i++){
+    //     dp[i]=dp[i-1]+dp[i-2];
+    //    }
+
+    //    int res=dp[n];
+
+
+        int res=fibo(n);
+        System.out.println(res);
+
+
+    }
+
+    //space optimised approach
+    public static int fibo(int n){
+        if(n<=1) return n;
+
+        int prev2=0,prev=1;
+        for(int i=2;i<=n;i++){
+            int curr=prev2+prev;
+            prev2=prev;
+            prev=curr;
+        }
+
+        return prev;
+    }
+
+    //recursive way
+    // public static int fibo(int n){
+    //     if(n<=1) return n;
+
+    //     return fibo(n-1)+fibo(n-2);
+        
+    // }
+
+    // memoised way 
+    // public static int fibo(int n,int[] dp){
+    //     if(n<=1) return n;
+
+    //     if(dp[n]!=-1) return dp[n];
+
+
+
+    //     return dp[n]=fibo(n-1,dp)+fibo(n-2,dp);
+        
+    // }
+}
+
+
+/*
+Fibonnaci series is a special series in mathmatics whose first two terms is 0 and 1 and we get current term by adding last two terms
+
+To solve this question we have used-
+1.recursive approach - O(2^n) time and O(n) recursive stack space
+2.Memoisation approach - O(n) time and O(2n) space - one O(n) for table and other for recursive stack
+3.tabulation approach - O(n) time and space
+4.Space Optimised Approach - O(n) time and O(1) space
+
+*/
