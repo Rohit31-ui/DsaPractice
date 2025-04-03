@@ -1,0 +1,65 @@
+
+
+import java.util.*;
+public class FirstAndLastPosition{
+    public static void main(String args[]){
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        int[] arr=new int[n];
+        for(int i=0;i<n;i++){
+            arr[i]=sc.nextInt();
+        }
+        int target=sc.nextInt();
+        int[] ans=new int[2];
+
+        ans[0]=search(arr,target,true);
+        ans[1]=search(arr,target,false);
+
+        for(int i=0;i<2;i++){
+            System.out.print(ans[i]+" ");
+        }
+
+    }
+
+    public static int search(int[] arr,int target,boolean firstPos){
+        int n=arr.length;
+        int left=0,right=n-1;
+        int pos=-1;
+        while(left<=right){
+            int mid=left+(right-left)/2;
+
+            if(arr[mid]==target){
+                pos=mid;
+
+                if(firstPos){
+                    right=mid-1;
+                }
+                else{
+                    left=mid+1;
+                }
+            }
+            else if(arr[mid]<target){
+                left=mid+1;
+            }
+            else{
+                right=mid-1;
+            }
+
+        }
+        return pos;
+    } 
+}
+
+/*
+
+First and last postion of target element 
+In this question they have give sorted duplicate array
+To find first and last postion of that target element we have used binary search
+
+++ Binary Search is very efficient algorithm to search the target element but we require an sorted array to apply binary search
+if array is unsorted then we can not apply binary search
+Time complexity of binary Search- O(logn)
+
+*/
+
+
