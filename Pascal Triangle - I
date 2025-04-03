@@ -1,0 +1,81 @@
+/*Example 1:
+
+Input: numRows = 5
+Output: [[1],[1,1],[1,2,1],[1,3,3,1],[1,4,6,4,1]]
+Example 2:
+
+Input: numRows = 1
+Output: [[1]]*/
+
+
+//code:-
+import java.util.*;
+
+public class PascalTriangle{
+    public static void main(String[] args){
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+
+        ArrayList<ArrayList<Integer>> list=generatePascal(n);
+
+        System.out.println(list);
+    }
+
+    public static ArrayList<ArrayList<Integer>> generatePascal(int n){
+        
+        ArrayList<ArrayList<Integer>> list=new ArrayList<();
+        if(n==0) return list;
+
+        for(int i=0;i<n;i++){
+            ArrayList<Integer> row=new ArrayList<>();
+            for(int j=0;j<=i;j++){
+                if(i==j || j==1){
+                    row.add(1);
+                }
+                else{
+                    int sum=list.get(i-1).get(j-1)+list.get(i-1).get(j);
+                    row.add(sum);
+                }
+            }
+
+            list.add(row);
+        }
+
+        return list;
+    }
+}
+
+
+
+/*
+Code to generate a pascal trinagle
+1
+1 1
+1 2 1
+1 3 3 1
+1 4 6 4 1
+1 5 10 10 5 1
+
+like that
+
+when we carefully see the we get to know that all element of first colume i.e(j==0) is 1 and also when (i==j)
+
+else we have summed up the previose rows current and their previous column
+In this we have to return 2D ArrayList
+ArrayList is also known as dynamic array
+
+Syntax of ArrayList Creation in java:-
+ArrayList<Integer> list=new ArrayList - 1d arrayList
+
+ArrayList<ArrayList<Integer>> list=new ArrayList<>(); -2d arraylist
+
+Operations of list-
+1.list.add(x);
+2.list.remove()
+3.list.size();
+4.list.get();
+5.list.isEmpty()
+6.list.contains()
+
+
+*/
