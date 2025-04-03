@@ -1,0 +1,143 @@
+//Question:-
+/*Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
+
+You may assume that each input would have exactly one solution, and you may not use the same element twice.
+
+You can return the answer in any order.*/
+
+//input and output:-
+/*Example 1:
+
+Input: nums = [2,7,11,15], target = 9
+Output: [0,1]
+Explanation: Because nums[0] + nums[1] == 9, we return [0, 1].
+Example 2:
+
+Input: nums = [3,2,4], target = 6
+Output: [1,2]
+Example 3:
+
+Input: nums = [3,3], target = 6
+Output: [0,1]
+
+*/
+
+
+import java.util.*;
+
+public class TwoSum{
+    public static void main(String[] args){
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        int[] arr=new int[n];
+
+        for(int i=0;i<n;i++){
+            arr[i]=sc.nextInt();
+        }
+
+        int[] res=new int[2];
+        int target=sc.nextInt();
+
+        //iterative - O(n^2) time and O(1) space
+       // res=findTwoSum(arr,target);
+
+        //time optimised - O(n) time and space
+       res=findTwoSumOpti(arr,target);
+
+       System.out.println(res[0] +" " + res[1]);
+
+    }
+
+    public static int[] findTwoSum(int[] arr,int target){
+        int n=arr.length;
+        int[] res=new int[2];
+
+        res[0]=-1;
+        res[1]=-1;
+        for(int i=0;i<n;i++){
+            for(int j=i+1;j<n;j++){
+                if(arr[i]+arr[j]==target){
+                    res[0]=i;
+                    res[1]=j;
+                    break;
+                }
+            }
+        }
+
+        return res;
+    }
+
+
+    public static int[] findTwoSumOpti(int[] arr,int target){
+        int n=arr.length;
+        int[] res=new int[2];
+
+        res[0]=-1;
+        res[1]=-1;
+        HashMap<Integer,Integer> map=new HashMap<>();
+
+        for(int i=0;i<n;i++){
+            int more=target-arr[i];
+            if(map.containsKey(more)){
+                res[0]=map.get(more);
+                res[1]=i;
+                break;
+            }
+            map.put(arr[i],i);
+        }
+
+        return res;
+    }
+}
+
+
+/*
+First approach is an brute force/ interartive approach it requires O(n^2) time 
+in second approach we have used hashmap
+
+HashMap stores values as a key value pair by using a hashfunction
+hashmaps are popular due to their efficient storage,retrival and lookup
+syntax to create hashmap:-
+HashMap<KeyType, ValueType> map = new HashMap<>();
+
+Various operation of stack:-
+1.put(K key, V value) → Adds a key-value pair to the HashMap.
+map.put(1, "One");
+map.put(2, "Two");
+
+2.remove(K key) → Removes a key-value pair based on the key.
+map.remove(1); // Removes key 1
+
+3. get(K key) → Retrieves the value associated with a key.
+String value = map.get(2); // Returns "Two"
+
+4.containsKey(K key) → Checks if a key exists in the HashMap.
+boolean exists = map.containsKey(2); // Returns true
+
+5.getOrDefault(K key, V defaultValue) → Returns the value for a key, or a default value if the key doesn’t exist.
+String val = map.getOrDefault(3, "Default"); // Returns "Default"
+
+6.containsValue(V value) → Checks if a specific value exists in the HashMap.
+boolean hasValue = map.containsValue("Two"); // Returns true
+
+7.size() → Returns the number of key-value pairs in the HashMap.
+int size = map.size(); // Returns 1
+
+8.keySet() → Returns a set of all keys in the HashMap.
+Set<Integer> keys = map.keySet();
+
+9.values() → Returns a collection of all values in the HashMap.
+Collection<String> values = map.values();
+
+10.entrySet() → Returns a set of key-value pairs (entries).
+for (Map.Entry<Integer, String> entry : map.entrySet()) {
+    System.out.println(entry.getKey() + " -> " + entry.getValue());
+}
+
+Time Complexity of HashMap Operations
+Operation	Time Complexity
+put()	O(1) (Average)
+get()	O(1) (Average)
+remove()	O(1) (Average)
+containsKey()	O(1) (Average)
+keySet(), values(), entrySet()	O(n)
